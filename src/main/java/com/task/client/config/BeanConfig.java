@@ -48,16 +48,6 @@ public class BeanConfig {
         return mapper;
     }
 
-
-    @Bean
-    public ThreadPoolTaskExecutor tpTaskExecutor() {
-        ThreadPoolTaskExecutor tpTaskExecutor = new ThreadPoolTaskExecutor();
-        tpTaskExecutor.setCorePoolSize(5);
-        tpTaskExecutor.setMaxPoolSize(10);
-        tpTaskExecutor.setKeepAliveSeconds(3000);
-        return tpTaskExecutor;
-    }
-
     @Bean
     @ConditionalOnMissingBean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
