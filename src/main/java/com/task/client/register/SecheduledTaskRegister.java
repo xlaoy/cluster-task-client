@@ -2,6 +2,7 @@ package com.task.client.register;
 
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.appinfo.InstanceInfo;
+import com.task.client.config.ServerURL;
 import com.task.client.exception.TaskClientException;
 import com.task.client.SecheduledTask;
 import com.task.client.support.SendServerRequestHelper;
@@ -28,9 +29,6 @@ public class SecheduledTaskRegister {
     private ApplicationContext context;
     private SendServerRequestHelper requestHelper;
 
-    private static final String TASK_SERVER_REGISTER_URL = "/task_server/register_secheduled_task";
-
-
     public void setInfoManager(ApplicationInfoManager infoManager) {
         this.infoManager = infoManager;
     }
@@ -53,7 +51,7 @@ public class SecheduledTaskRegister {
         }
         SecheduledRegisterDTO registerDTO = this.getSecheduledRegisterDTO();
         if(!CollectionUtils.isEmpty(registerDTO.getSecheduledInfoList())) {
-            requestHelper.sendRequest(TASK_SERVER_REGISTER_URL, registerDTO);
+            requestHelper.sendRequest(ServerURL.TASK_SERVER_REGISTER_URL, registerDTO);
         } else {
             logger.warn("定时任务列表为空，系统不注册定时任务");
         }

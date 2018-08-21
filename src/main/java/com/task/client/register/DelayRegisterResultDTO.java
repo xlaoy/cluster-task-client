@@ -9,8 +9,6 @@ import java.util.List;
 public class DelayRegisterResultDTO {
 
     public static final String SUCCESS = "success";
-    public static final String PARAMETER_ERROR = "parameter_error";
-    public static final String TASK_EXISTS = "task_exists";
 
     private String code;
 

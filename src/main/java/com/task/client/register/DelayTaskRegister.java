@@ -3,6 +3,7 @@ package com.task.client.register;
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.appinfo.InstanceInfo;
 import com.task.client.DelayTask;
+import com.task.client.config.ServerURL;
 import com.task.client.exception.TaskClientException;
 import com.task.client.support.SendServerRequestHelper;
 import org.slf4j.Logger;
@@ -24,8 +25,7 @@ public class DelayTaskRegister {
     private ApplicationInfoManager infoManager;
     private ApplicationContext context;
 
-    private static final String DELAY_TASK_REGISTER_URL = "/task_server/register_delay_task";
-    private static final String DELAY_TASK_CANCEL_URL = "/task_server/cancel_delay_task";
+
 
     public DelayTaskRegister(SendServerRequestHelper requestHelper, ApplicationInfoManager infoManager, ApplicationContext context) {
         this.requestHelper = requestHelper;
@@ -77,7 +77,7 @@ public class DelayTaskRegister {
             delayInfoList.add(delayInfo);
         }
         dto.setDelayInfoList(delayInfoList);
-        DelayRegisterResultDTO resultDTO = requestHelper.sendRequest(DELAY_TASK_REGISTER_URL, dto, DelayRegisterResultDTO.class);
+        DelayRegisterResultDTO resultDTO = requestHelper.sendRequest(ServerURL.DELAY_TASK_REGISTER_URL, dto, DelayRegisterResultDTO.class);
         if(!DelayRegisterResultDTO.SUCCESS.equals(resultDTO.getCode())) {
             throw new TaskClientException(resultDTO.getMessage());
         }
@@ -100,7 +100,7 @@ public class DelayTaskRegister {
         if(CollectionUtils.isEmpty(taskIdList)) {
             throw new TaskClientException("取消延迟任务taskIdList不能为空");
         }
-        requestHelper.sendRequest(DELAY_TASK_CANCEL_URL, taskIdList);
+        requestHelper.sendRequest(ServerURL.DELAY_TASK_CANCEL_URL, taskIdList);
     }
 
     /**
