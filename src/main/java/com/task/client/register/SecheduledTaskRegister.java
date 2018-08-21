@@ -119,7 +119,7 @@ public class SecheduledTaskRegister {
         headers.add("Authorization", "Basic " + authToken);
         try {
             HttpEntity<String> registerEntity = new HttpEntity<>(mapper.writeValueAsString(registerDTO), headers);
-            restTemplate.postForEntity(registerUri, registerEntity, void.class);
+            restTemplate.postForEntity(registerUri, registerEntity, String.class);
         } catch (IOException e) {
             logger.error("注册定时任务错误", e);
             throw new TaskClientException("注册定时任务错误");
