@@ -10,11 +10,11 @@ public class TaskClientProperties {
 
     private boolean register = true;
 
-    private String taskServerName;
+    private String taskServerName = "cluster-task-server";
 
-    private String username;
+    private String username = "task";
 
-    private String password;
+    private String password = "123456";
 
     public boolean isRegister() {
         return register;

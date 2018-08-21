@@ -5,7 +5,7 @@ package com.task.client.execute;
  * Created by Administrator on 2018/8/19 0019.
  */
 
-public class SecheduledResponseDTO {
+public class SecheduledResultDTO {
 
     public static final String EXECUTE_SUCCESS = "execute_success";
     public static final String EXECUTE_FAILURE = "execute_failure";

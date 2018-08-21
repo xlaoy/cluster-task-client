@@ -7,5 +7,5 @@ public interface DelayTask {
 
     String bizName();
 
-    void execute(String bizId);
+    void execute(String bizParameters);
 }
