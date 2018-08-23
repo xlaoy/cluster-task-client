@@ -2,6 +2,7 @@ package com.task.client.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.ApplicationInfoManager;
+import com.task.client.exception.CronSequenceErrorException;
 import com.task.client.register.DelayTaskRegister;
 import com.task.client.register.SecheduledTaskRegister;
 import com.task.client.support.SendServerRequestHelper;
@@ -59,6 +60,9 @@ public class TaskClientAutoConfiguration {
             register.register();
         } catch (Exception e) {
             logger.error("", e);
+            if(e instanceof CronSequenceErrorException) {
+                throw e;
+            }
         }
         return register;
     }

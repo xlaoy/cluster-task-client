@@ -3,6 +3,7 @@ package com.task.client.register;
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.appinfo.InstanceInfo;
 import com.task.client.config.ServerURL;
+import com.task.client.exception.CronSequenceErrorException;
 import com.task.client.exception.TaskClientException;
 import com.task.client.SecheduledTask;
 import com.task.client.support.SendServerRequestHelper;
@@ -67,7 +68,12 @@ public class SecheduledTaskRegister {
         if(!CollectionUtils.isEmpty(beanMap)) {
             beanMap.forEach((key, value) -> {
                 //检验表达式是否配置正确
-                new CronSequenceGenerator(value.cron()).next(new Date());
+                try {
+                    new CronSequenceGenerator(value.cron()).next(new Date());
+                } catch (Exception e) {
+                    logger.error("", e);
+                    throw new CronSequenceErrorException(e.getMessage());
+                }
                 Class clazz = value.getClass();
                 SecheduledRegisterDTO.SecheduledInfo secheduledInfo = new SecheduledRegisterDTO.SecheduledInfo();
                 secheduledInfo.setClassName(clazz.getName());
